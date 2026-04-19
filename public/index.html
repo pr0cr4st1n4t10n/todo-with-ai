@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo with AI</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="mesh"></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <main class="container">
+      <header class="hero">
+        <h1>ToDo with AI</h1>
+        <p class="subtitle">
+          Декомпозируй задачу в ветвистый todo, редактируй ветки вручную и с
+          подсказками ИИ, получай оценку в часах и стоимости.
+        </p>
+        <div class="hero-chips">
+          <span class="chip">AI-декомпозиция</span>
+          <span class="chip">Умные ветки</span>
+          <span class="chip">Финансовый расчет</span>
+        </div>
+      </header>
+
+      <section class="panel">
+        <h2>1) Цель проекта</h2>
+        <textarea id="taskDescription" placeholder="Например: запустить мобильное приложение для доставки еды с личным кабинетом, оплатой и аналитикой"></textarea>
+        <div class="row">
+          <button id="generateBtn" class="btn primary">Сгенерировать дерево задач</button>
+          <button id="improveBtn" class="btn ghost">Улучшить все дерево ИИ</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="heading-row">
+          <h2>2) Древовидный To-Do</h2>
+          <div class="row">
+            <button id="addRootBtn" class="btn mini">+ Корневая ветка</button>
+          </div>
+        </div>
+
+        <div id="treeContainer" class="tree"></div>
+
+        <div class="helper">
+          <h3>Подсказки по выбранной ветке</h3>
+          <p id="selectedNodeLabel" class="muted">Ветка не выбрана</p>
+          <div class="row">
+            <button id="branchTipsBtn" class="btn secondary">Подсказать для ветки</button>
+            <button id="applyAiChildrenBtn" class="btn ghost">Добавить AI-подветки</button>
+          </div>
+          <div id="branchTips"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>3) Финансовая оценка</h2>
+        <div class="finance-row">
+          <div class="rate-wrap">
+            <label for="hourlyRate">Ставка за час</label>
+            <input id="hourlyRate" type="number" min="0" step="1" value="500" />
+          </div>
+          <button id="estimateBtn" class="btn accent">Рассчитать часы и стоимость</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Результаты</h2>
+        <div id="status" class="status">Готов к работе.</div>
+        <div id="suggestions"></div>
+        <div id="estimation"></div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
