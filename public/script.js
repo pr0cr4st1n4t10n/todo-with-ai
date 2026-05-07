@@ -32,6 +32,23 @@ function resetProjectUiState() {
   state.projectMembers = [];
   document.getElementById("projectDetails").classList.add("hidden");
   document.getElementById("projectDetailsEmpty").classList.remove("hidden");
+  const statusNode = document.getElementById("status");
+  const suggestionsNode = document.getElementById("suggestions");
+  const estimationNode = document.getElementById("estimation");
+  const treeNode = document.getElementById("treeContainer");
+  if (statusNode) {
+    statusNode.textContent = "Готов к работе.";
+    statusNode.style.color = "#92a0be";
+  }
+  if (suggestionsNode) {
+    suggestionsNode.innerHTML = "";
+  }
+  if (estimationNode) {
+    estimationNode.innerHTML = "";
+  }
+  if (treeNode) {
+    treeNode.innerHTML = "<p class='muted'>Пока пусто. Выбери проект.</p>";
+  }
 }
 
 function showToast(message, isError = false) {
@@ -459,6 +476,12 @@ async function completePlannerNode(nodeId) {
   });
 }
 
+async function uncompletePlannerNode(nodeId) {
+  return request(`/api/projects/${state.activeProjectId}/planner/nodes/${nodeId}/uncomplete`, {
+    method: "POST"
+  });
+}
+
 async function loadProfile() {
   const data = await request("/api/profile/me");
   state.currentUser = data.profile;
@@ -798,7 +821,7 @@ function renderNode(node, depth = 0) {
     const cancelBtn = document.createElement("button");
     cancelBtn.className = "btn mini";
     cancelBtn.textContent = "Отменить";
-    cancelBtn.disabled = !isCurrentUserAssignee;
+    cancelBtn.disabled = !isCurrentUserAssignee || Boolean(node.completed);
     cancelBtn.addEventListener("click", async () => {
       try {
         await cancelPlannerNode(node.id);
@@ -810,13 +833,17 @@ function renderNode(node, depth = 0) {
     });
     const completeBtn = document.createElement("button");
     completeBtn.className = "btn mini";
-    completeBtn.textContent = "Выполнено";
-    completeBtn.disabled = !isCurrentUserAssignee || Boolean(node.completed);
+    completeBtn.textContent = node.completed ? "Снять выполнено" : "Выполнено";
+    completeBtn.disabled = !isCurrentUserAssignee;
     completeBtn.addEventListener("click", async () => {
       try {
-        await completePlannerNode(node.id);
+        if (node.completed) {
+          await uncompletePlannerNode(node.id);
+        } else {
+          await completePlannerNode(node.id);
+        }
         await Promise.all([loadPlanner(), loadDashboard()]);
-        showToast("Задача отмечена выполненной.");
+        showToast(node.completed ? "Статус выполнения снят." : "Задача отмечена выполненной.");
       } catch (error) {
         if (String(error.message || "").includes("Cannot POST")) {
           showToast("Сервер не обновлен: endpoint завершения задачи недоступен. Перезапусти backend.", true);

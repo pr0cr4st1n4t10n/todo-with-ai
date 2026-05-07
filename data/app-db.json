@@ -39,6 +39,16 @@
       "bio": "",
       "avatarPath": "",
       "createdAt": "2026-05-07T09:41:19.043Z"
+    },
+    {
+      "id": "usr_1778155355444_fdc85e2e",
+      "username": "user2",
+      "email": "dwвцффцвadaw@mail.ru",
+      "passwordHash": "$2b$10$.TcbHUeTKLJAq8irzjPWweGuyZsgq7QZ3oibkxUxJlYDrjik/Qe96",
+      "displayName": "Василий Иванов",
+      "bio": "",
+      "avatarPath": "",
+      "createdAt": "2026-05-07T12:02:35.444Z"
     }
   ],
   "projects": [
@@ -129,6 +139,17 @@
       "status": "accepted",
       "createdAt": "2026-05-07T09:15:22.059Z",
       "respondedAt": "2026-05-07T09:15:32.768Z"
+    },
+    {
+      "id": "inv_1778156033912_5f909a36",
+      "projectId": "prj_1778144144785_65c1d160",
+      "username": "user2",
+      "role": "worker",
+      "invitedBy": "usr_1778144099868_845cc0d7",
+      "invitedUserId": "usr_1778155355444_fdc85e2e",
+      "status": "pending",
+      "createdAt": "2026-05-07T12:13:53.912Z",
+      "respondedAt": null
     }
   ],
   "tasks": [
@@ -825,16 +846,16 @@
           "title": "Планирование и Анализ",
           "details": "Определение основных требований, целевой аудитории и конкурентного анализа.",
           "priority": "Высокий",
-          "completed": true,
-          "assigneeId": "usr_1778144856355_52204a55",
+          "completed": false,
+          "assigneeId": null,
           "children": [
             {
               "id": "node-1778151072866-0-1778151072866-0",
               "title": "Исследование рынка и конкурентов",
               "details": "Анализ существующих приложений доставки еды, выявление их сильных и слабых сторон.",
               "priority": "Высокий",
-              "completed": true,
-              "assigneeId": "usr_1778144856355_52204a55",
+              "completed": false,
+              "assigneeId": null,
               "children": []
             },
             {
@@ -842,8 +863,8 @@
               "title": "Определение целевой аудитории",
               "details": "Сегментация пользователей, создание портретов типичных клиентов.",
               "priority": "Высокий",
-              "completed": true,
-              "assigneeId": "usr_1778144856355_52204a55",
+              "completed": false,
+              "assigneeId": null,
               "children": []
             },
             {
@@ -851,8 +872,8 @@
               "title": "Формирование MVP (Minimum Viable Product)",
               "details": "Определение минимального набора функций для запуска.",
               "priority": "Высокий",
-              "completed": true,
-              "assigneeId": "usr_1778144856355_52204a55",
+              "completed": false,
+              "assigneeId": null,
               "children": []
             },
             {
@@ -860,8 +881,8 @@
               "title": "Разработка технического задания (ТЗ)",
               "details": "Детальное описание функциональных и нефункциональных требований.",
               "priority": "Высокий",
-              "completed": true,
-              "assigneeId": "usr_1778144856355_52204a55",
+              "completed": false,
+              "assigneeId": null,
               "children": []
             }
           ]
@@ -871,16 +892,16 @@
           "title": "Дизайн и UX/UI",
           "details": "Разработка пользовательских интерфейсов и сценариев взаимодействия.",
           "priority": "Высокий",
-          "completed": false,
-          "assigneeId": null,
+          "completed": true,
+          "assigneeId": "usr_1778144856355_52204a55",
           "children": [
             {
               "id": "node-1778151072866-1-1778151072866-0",
               "title": "Проектирование пользовательских сценариев (User Flows)",
               "details": "Определение путей пользователя в приложении.",
               "priority": "Высокий",
-              "completed": false,
-              "assigneeId": null,
+              "completed": true,
+              "assigneeId": "usr_1778144856355_52204a55",
               "children": []
             },
             {
@@ -888,8 +909,8 @@
               "title": "Создание вайрфреймов (Wireframes)",
               "details": "Разработка схематичных макетов страниц.",
               "priority": "Высокий",
-              "completed": false,
-              "assigneeId": null,
+              "completed": true,
+              "assigneeId": "usr_1778144856355_52204a55",
               "children": []
             },
             {
@@ -897,8 +918,8 @@
               "title": "Разработка UI-дизайна",
               "details": "Создание визуального стиля приложения, иконок, цветовой палитры.",
               "priority": "Высокий",
-              "completed": false,
-              "assigneeId": null,
+              "completed": true,
+              "assigneeId": "usr_1778144856355_52204a55",
               "children": []
             },
             {
@@ -906,8 +927,8 @@
               "title": "Прототипирование",
               "details": "Создание интерактивного прототипа для тестирования UX.",
               "priority": "Средний",
-              "completed": false,
-              "assigneeId": null,
+              "completed": true,
+              "assigneeId": "usr_1778144856355_52204a55",
               "children": []
             }
           ]
@@ -1120,7 +1141,7 @@
           "details": "Публикация приложения в магазинах и настройка инфраструктуры.",
           "priority": "Высокий",
           "completed": false,
-          "assigneeId": null,
+          "assigneeId": "usr_1778144856355_52204a55",
           "children": [
             {
               "id": "node-1778151072866-6-1778151072866-0",
@@ -1128,7 +1149,7 @@
               "details": "Развертывание бэкенда на серверах.",
               "priority": "Высокий",
               "completed": false,
-              "assigneeId": null,
+              "assigneeId": "usr_1778144856355_52204a55",
               "children": []
             },
             {
@@ -1137,7 +1158,7 @@
               "details": "Создание аккаунтов разработчика, подготовка метаданных.",
               "priority": "Высокий",
               "completed": false,
-              "assigneeId": null,
+              "assigneeId": "usr_1778144856355_52204a55",
               "children": []
             },
             {
@@ -1146,7 +1167,7 @@
               "details": "Загрузка и отправка приложения на ревью в магазины.",
               "priority": "Высокий",
               "completed": false,
-              "assigneeId": null,
+              "assigneeId": "usr_1778144856355_52204a55",
               "children": []
             },
             {
@@ -1155,23 +1176,23 @@
               "details": "Продвижение приложения после запуска.",
               "priority": "Средний",
               "completed": false,
-              "assigneeId": null,
+              "assigneeId": "usr_1778144856355_52204a55",
               "children": []
             }
           ]
         }
       ],
-      "updatedAt": "2026-05-07T11:36:38.405Z",
+      "updatedAt": "2026-05-07T12:14:33.702Z",
       "updatedBy": "usr_1778144099868_845cc0d7"
     }
   ],
   "refreshTokens": [
     {
-      "id": "rt_1778153869549_3636079f",
+      "id": "rt_1778156162037_a4a1fae3",
       "userId": "usr_1778144856355_52204a55",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfMTc3ODE0NDg1NjM1NV81MjIwNGE1NSIsImlhdCI6MTc3ODE1Mzg2OSwiZXhwIjoxNzgwNzQ1ODY5fQ.jUEY2CxjRq_tkxkIADOE3sBko0JFc8cwcOwU3maSVCs",
-      "expiresAt": "2026-06-06T11:37:49.549Z",
-      "createdAt": "2026-05-07T11:37:49.549Z"
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfMTc3ODE0NDg1NjM1NV81MjIwNGE1NSIsImlhdCI6MTc3ODE1NjE2MiwiZXhwIjoxNzgwNzQ4MTYyfQ.R0kO1OJJF0pwzGkGQ06YAu8k1uVC905VK9DFW_syGsU",
+      "expiresAt": "2026-06-06T12:16:02.037Z",
+      "createdAt": "2026-05-07T12:16:02.037Z"
     }
   ]
 }

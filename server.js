@@ -278,6 +278,15 @@ function completePlannerNodeRecursivelyForAssignee(node, assigneeId) {
   }
 }
 
+function uncompletePlannerNodeRecursivelyForAssignee(node, assigneeId) {
+  if (node.assigneeId === assigneeId) {
+    node.completed = false;
+  }
+  for (const child of node.children || []) {
+    uncompletePlannerNodeRecursivelyForAssignee(child, assigneeId);
+  }
+}
+
 function safeParseJson(input) {
   try {
     return JSON.parse(input);
@@ -911,6 +920,9 @@ app.post(
     if (!node.assigneeId || node.assigneeId !== req.auth.userId) {
       return res.status(403).json({ error: "Вы не являетесь исполнителем этой задачи" });
     }
+    if (node.completed) {
+      return res.status(400).json({ error: "Нельзя отменить задачу после отметки выполнения" });
+    }
     releasePlannerAssigneeRecursively(node, req.auth.userId);
     planner.updatedAt = new Date().toISOString();
     planner.updatedBy = req.auth.userId;
@@ -939,6 +951,33 @@ app.post(
       return res.status(403).json({ error: "Вы можете завершать только свои задачи" });
     }
     completePlannerNodeRecursivelyForAssignee(node, req.auth.userId);
+    planner.updatedAt = new Date().toISOString();
+    planner.updatedBy = req.auth.userId;
+    writeDb(req.db);
+    return res.json({ ok: true, node });
+  }
+);
+
+app.post(
+  "/api/projects/:projectId/planner/nodes/:nodeId/uncomplete",
+  requireAuth,
+  requireProjectMembership,
+  (req, res) => {
+    if (req.membership.role !== "worker") {
+      return res.status(403).json({ error: "Только Работник может менять статус выполнения задач" });
+    }
+    const planner = req.db.planners.find((item) => item.projectId === req.project.id);
+    if (!planner) {
+      return res.status(404).json({ error: "AI Planner для проекта не найден" });
+    }
+    const node = findPlannerNodeById(planner.tree || [], req.params.nodeId);
+    if (!node) {
+      return res.status(404).json({ error: "Задача в AI Planner не найдена" });
+    }
+    if (!node.assigneeId || node.assigneeId !== req.auth.userId) {
+      return res.status(403).json({ error: "Вы можете менять статус только своих задач" });
+    }
+    uncompletePlannerNodeRecursivelyForAssignee(node, req.auth.userId);
     planner.updatedAt = new Date().toISOString();
     planner.updatedBy = req.auth.userId;
     writeDb(req.db);
