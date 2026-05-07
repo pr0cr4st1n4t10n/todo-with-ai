@@ -1,73 +1,66 @@
-# 📊 Основной алгоритм (RU):
-1. **Пользователь вводит цель проекта** для генерации структуры задач.
-2. **Пользователь запускает генерацию дерева** и получает иерархический To-Do.
-3. Система **генерирует и улучшает данные** через AI и получает:
-   - **Ветки и подветки задач**
-   - **Приоритеты** (низкий/средний/высокий)
-   - **Подсказки по выбранной ветке**
-   - **Оценку часов по задачам**
-4. Пользователь редактирует дерево вручную:
-   - ➕ Добавляет корневые ветки и подветки
-   - ✅ Отмечает выполненные задачи
-   - 🗑️ Удаляет лишние пункты
-5. Пользователь запускает **расчет часов и стоимости**:
-   - **Полная стоимость**
-   - **Стоимость выполненных задач**
-   - **Стоимость с вычетом выполненных**
+# ToDo with AI / Team Planner
+
+Веб-приложение для командной работы над проектами: работодатель формирует план проекта, приглашает участников, а работники берут и выполняют задачи прямо в древовидном AI Planner.
 
 ---
 
-# ⚙️ Набор технологий, инструментов и библиотек (RU):
+## Возможности (RU)
 
-## 🖥️ Языки программирования:
-- **HTML5** – Структура страницы
-- **CSS** – Стилизация интерфейса (neon/glass UI)
-- **JavaScript** – Основная логика фронтенда
+### 1) Авторизация и личный кабинет
+- Регистрация и вход по `username + password`
+- Личный кабинет: аватар, отображаемое имя, username, bio, смена пароля
 
-## 📚 Библиотеки и платформы:
-- **Node.js** – Среда выполнения серверной части
-- **Express** – Backend API
-- **dotenv** – Работа с переменными окружения
-- **CORS** – Кросс-доменные запросы
+### 2) Проекты и роли
+- Создание проекта
+- Роли в проекте:
+  - **Работодатель**: управляет проектом и AI Planner
+  - **Работник**: берет задачи и отмечает выполнение
+- Приглашения в проект по `username` с выбором роли
+- Принятие/отклонение приглашений
 
-## 🤖 AI-интеграции:
-- **OpenRouter API** – доступ к LLM-моделям
-- **Fallback free models** – резервные бесплатные модели для устойчивой работы
+### 3) AI Planner как единый источник задач
+- Генерация дерева задач по цели проекта через AI
+- Улучшение дерева и подсказки по выбранной ветке
+- Редактирование дерева (работодатель): ветки/подветки, приоритеты, детали
+- Автосохранение плана в проект
+
+### 4) Совместная работа в AI Planner
+- Работник может взять задачу
+- Если берется ветка, берутся и ее подветки
+- Нельзя взять задачу, уже взятую другим участником
+- Работник может отменить только свои задачи
+- Работник может отмечать свои задачи как выполненные
+- Работодатель видит, кто взял задачу (`@username`)
+
+### 5) Оценка часов и стоимости
+- AI-оценка часов по узлам дерева
+- Расчет:
+  - общей стоимости
+  - стоимости выполненных задач
+  - остатка стоимости
+- Дополнительно: выплаты по работникам за **выполненные и назначенные им** задачи
 
 ---
 
-# 📊 Core Algorithm (EN):
-1. **User enters a project goal** to generate a task structure.
-2. **User triggers tree generation** and receives a hierarchical To-Do.
-3. System **generates and improves data** via AI and retrieves:
-   - **Task branches and sub-branches**
-   - **Priorities** (low/medium/high)
-   - **AI tips for selected branch**
-   - **Hour estimates per task**
-4. User edits the tree manually:
-   - ➕ Add root branches and child branches
-   - ✅ Mark completed tasks
-   - 🗑️ Remove unnecessary items
-5. User runs **hours and cost estimation**:
-   - **Total cost**
-   - **Completed tasks cost**
-   - **Remaining cost (excluding completed tasks)**
+## Быстрый запуск (RU)
+
+1. Установить зависимости:
+   - `npm install`
+2. Создать `.env` (или использовать `.env.example`) и указать:
+   - `OPENROUTER_API_KEY`
+   - при необходимости `OPENROUTER_MODEL`, `OPENROUTER_FALLBACK_MODELS`
+3. Запустить сервер:
+   - `npm start`
+4. Открыть в браузере:
+   - `http://localhost:3000`
 
 ---
 
-# ⚙️ Technology Stack (EN):
+## Технологии
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript
+- **Backend**: Node.js, Express
+- **Auth/Security**: jsonwebtoken, bcryptjs, cookie-parser
+- **Файлы/данные**: multer, JSON DB (`data/app-db.json`)
+- **AI**: OpenRouter API (+ fallback models)
 
-## 🖥️ Programming Languages:
-- **HTML5** – Page structure
-- **CSS** – Interface styling (neon/glass UI)
-- **JavaScript** – Frontend application logic
-
-## 📚 Libraries and Platforms:
-- **Node.js** – Backend runtime
-- **Express** – Backend API framework
-- **dotenv** – Environment variable management
-- **CORS** – Cross-origin request handling
-
-## 🤖 AI Integrations:
-- **OpenRouter API** – LLM access layer
-- **Fallback free models** – backup free models for better availability
+---
