@@ -14,65 +14,185 @@
       <header class="hero">
         <h1>ToDo with AI</h1>
         <p class="subtitle">
-          Декомпозируй задачу в ветвистый todo, редактируй ветки вручную и с
-          подсказками ИИ, получай оценку в часах и стоимости.
+          Декомпозируй задачу в ветвистый todo, редактируй ветки вручную и с подсказками ИИ, получай оценку в часах и
+          стоимости — а также веди проекты и задачи в команде.
         </p>
-        <div class="hero-chips">
-          <span class="chip">AI-декомпозиция</span>
-          <span class="chip">Умные ветки</span>
-          <span class="chip">Финансовый расчет</span>
-        </div>
       </header>
 
-      <section class="panel">
-        <h2>1) Цель проекта</h2>
-        <textarea id="taskDescription" placeholder="Например: запустить мобильное приложение для доставки еды с личным кабинетом, оплатой и аналитикой"></textarea>
-        <div class="row">
-          <button id="generateBtn" class="btn primary">Сгенерировать дерево задач</button>
-          <button id="improveBtn" class="btn ghost">Улучшить все дерево ИИ</button>
+      <section id="authView" class="auth-wrap">
+        <div class="panel auth-card">
+          <div class="auth-head">
+            <h2 id="authTitle">Вход</h2>
+            <div class="auth-switch">
+              <button id="authModeLogin" class="btn mini auth-mode active" type="button">Вход</button>
+              <button id="authModeRegister" class="btn mini auth-mode" type="button">Регистрация</button>
+            </div>
+          </div>
+
+          <div id="loginForm" class="form-stack">
+            <input id="loginInput" type="text" placeholder="Username или email" />
+            <input id="loginPasswordInput" type="password" placeholder="Пароль" />
+            <button id="loginBtn" class="btn primary">Войти</button>
+            <p class="muted tiny">Если уже входил раньше — сработает автологин через refresh-токен.</p>
+          </div>
+
+          <div id="registerForm" class="form-stack hidden">
+            <input id="regUsernameInput" type="text" placeholder="Username" />
+            <input id="regEmailInput" type="email" placeholder="Email" />
+            <input id="regDisplayNameInput" type="text" placeholder="Отображаемое имя" />
+            <input id="regPasswordInput" type="password" placeholder="Пароль (минимум 6 символов)" />
+            <button id="registerBtn" class="btn secondary">Создать аккаунт</button>
+            <p class="muted tiny">Пароль хранится только в виде безопасного хеша (bcrypt).</p>
+          </div>
         </div>
+
+        <div id="authStatus" class="panel status auth-status">Готов к входу.</div>
       </section>
 
-      <section class="panel">
-        <div class="heading-row">
-          <h2>2) Древовидный To-Do</h2>
+      <section id="appView" class="hidden">
+        <nav class="panel navbar">
           <div class="row">
-            <button id="addRootBtn" class="btn mini">+ Корневая ветка</button>
+            <button data-tab="dashboard" class="btn mini nav-btn active">Дашборд</button>
+            <button data-tab="projects" class="btn mini nav-btn">Проекты</button>
+            <button data-tab="profile" class="btn mini nav-btn">Профиль</button>
+            <button data-tab="settings" class="btn mini nav-btn">Настройки</button>
           </div>
-        </div>
-
-        <div id="treeContainer" class="tree"></div>
-
-        <div class="helper">
-          <h3>Подсказки по выбранной ветке</h3>
-          <p id="selectedNodeLabel" class="muted">Ветка не выбрана</p>
-          <div class="row">
-            <button id="branchTipsBtn" class="btn secondary">Подсказать для ветки</button>
-            <button id="applyAiChildrenBtn" class="btn ghost">Добавить AI-подветки</button>
+          <div class="row user-nav">
+            <img id="navAvatar" class="avatar tiny" alt="avatar" />
+            <span id="navUserLabel" class="muted"></span>
+            <button id="logoutBtn" class="btn ghost">Выйти</button>
           </div>
-          <div id="branchTips"></div>
-        </div>
-      </section>
+        </nav>
 
-      <section class="panel">
-        <h2>3) Финансовая оценка</h2>
-        <div class="finance-row">
-          <div class="rate-wrap">
-            <label for="hourlyRate">Ставка за час</label>
-            <input id="hourlyRate" type="number" min="0" step="1" value="500" />
+        <section id="statusToast" class="panel status-toast hidden"></section>
+
+        <section id="dashboardTab" class="tab-pane">
+          <div class="panel">
+            <h2>Активные проекты</h2>
+            <div id="dashboardProjects"></div>
           </div>
-          <button id="estimateBtn" class="btn accent">Рассчитать часы и стоимость</button>
-        </div>
-      </section>
+          <div class="panel">
+            <h2>Ожидающие приглашения</h2>
+            <div id="pendingInvitations"></div>
+          </div>
+        </section>
 
-      <section class="panel">
-        <h2>Результаты</h2>
-        <div id="status" class="status">Готов к работе.</div>
-        <div id="suggestions"></div>
-        <div id="estimation"></div>
+        <section id="projectsTab" class="tab-pane hidden">
+          <div class="panel">
+            <h2>Создать проект</h2>
+            <div class="form-stack">
+              <input id="newProjectName" type="text" placeholder="Название проекта" />
+              <textarea id="newProjectDescription" placeholder="Описание"></textarea>
+              <button id="createProjectBtn" class="btn accent">Создать проект</button>
+            </div>
+          </div>
+          <div class="panel">
+            <h2>Мои проекты</h2>
+            <div id="projectsList"></div>
+          </div>
+          <div class="panel">
+            <h2>Детали проекта</h2>
+            <div id="projectDetailsEmpty" class="muted">Выбери проект из списка слева.</div>
+            <div id="projectDetails" class="hidden">
+              <h3 id="projectTitle"></h3>
+              <p id="projectMeta" class="muted"></p>
+              <div class="form-stack employer-only">
+                <textarea id="editProjectDescription" placeholder="Описание проекта"></textarea>
+                <div class="row">
+                  <button id="saveProjectBtn" class="btn secondary">Сохранить проект</button>
+                  <button id="deleteProjectBtn" class="btn ghost">Удалить проект</button>
+                </div>
+              </div>
+              <h3>Участники</h3>
+              <div id="projectMembers"></div>
+              <h3 class="employer-only">Пригласить участника</h3>
+              <div class="form-stack employer-only">
+                <div class="grid-two">
+                  <input id="inviteUsernameInput" type="text" placeholder="username" />
+                </div>
+                <select id="inviteRoleInput">
+                  <option value="worker">Работник</option>
+                  <option value="employer">Работодатель</option>
+                </select>
+                <button id="sendInviteBtn" class="btn primary">Отправить приглашение</button>
+              </div>
+              <div id="plannerSection" class="panel inner hidden">
+                <h3>AI Planner для проекта</h3>
+                <section class="panel slim employer-only">
+                  <h4>1) Цель проекта</h4>
+                  <textarea id="taskDescription" placeholder="Например: запустить мобильное приложение для доставки еды с личным кабинетом, оплатой и аналитикой"></textarea>
+                  <div class="row">
+                    <button id="generateBtn" class="btn primary">Сгенерировать дерево задач</button>
+                    <button id="improveBtn" class="btn ghost">Улучшить все дерево ИИ</button>
+                  </div>
+                </section>
+                <section class="panel slim">
+                  <div class="heading-row">
+                    <h4>2) Задачи проекта (AI Planner)</h4>
+                    <div class="row employer-only">
+                      <button id="addRootBtn" class="btn mini">+ Корневая ветка</button>
+                    </div>
+                  </div>
+                  <div id="treeContainer" class="tree"></div>
+                  <div class="helper employer-only">
+                    <h4>Подсказки по выбранной ветке</h4>
+                    <p id="selectedNodeLabel" class="muted">Ветка не выбрана</p>
+                    <div class="row">
+                      <button id="branchTipsBtn" class="btn secondary">Подсказать для ветки</button>
+                      <button id="applyAiChildrenBtn" class="btn ghost">Добавить AI-подветки</button>
+                    </div>
+                    <div id="branchTips"></div>
+                  </div>
+                </section>
+                <section class="panel slim employer-only">
+                  <h4>3) Финансовая оценка</h4>
+                  <div class="finance-row">
+                    <div class="rate-wrap">
+                      <label for="hourlyRate">Ставка за час</label>
+                      <input id="hourlyRate" type="number" min="0" step="1" value="500" />
+                    </div>
+                    <button id="estimateBtn" class="btn accent">Рассчитать часы и стоимость</button>
+                  </div>
+                </section>
+                <section class="panel slim">
+                  <h4>Результаты</h4>
+                  <div id="status" class="status">Готов к работе.</div>
+                  <div id="suggestions"></div>
+                  <div id="estimation"></div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="profileTab" class="tab-pane hidden">
+          <div class="panel">
+            <h2>Профиль</h2>
+            <img id="profileAvatar" class="avatar large" alt="avatar" />
+            <div class="form-stack">
+              <input id="avatarInput" type="file" accept="image/*" />
+              <input id="profileDisplayName" type="text" placeholder="Отображаемое имя" />
+              <input id="profileUsername" type="text" placeholder="Username" />
+              <textarea id="profileBio" placeholder="О себе"></textarea>
+              <button id="saveProfileBtn" class="btn secondary">Сохранить профиль</button>
+            </div>
+            <h3>Участие в проектах</h3>
+            <div id="profileProjects"></div>
+          </div>
+        </section>
+
+        <section id="settingsTab" class="tab-pane hidden">
+          <div class="panel">
+            <h2>Смена пароля</h2>
+            <div class="form-stack">
+              <input id="currentPasswordInput" type="password" placeholder="Текущий пароль" />
+              <input id="newPasswordInput" type="password" placeholder="Новый пароль" />
+              <button id="changePasswordBtn" class="btn accent">Обновить пароль</button>
+            </div>
+          </div>
+        </section>
       </section>
     </main>
-
     <script src="./script.js"></script>
   </body>
 </html>
