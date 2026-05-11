@@ -169,6 +169,48 @@ label { color: var(--muted); display: block; margin-bottom: 8px; }
 .btn.ghost { background: #141c32; border-color: var(--line); }
 .btn.mini { background: #18223f; border-color: var(--line); padding: 8px 12px; }
 
+.btn-center {
+  display: flex;
+  justify-content: center;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.auth-hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--cyan);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
 #estimateBtn {
   padding: 8px 12px;
   font-size: 13px;
@@ -550,7 +592,7 @@ label { color: var(--muted); display: block; margin-bottom: 8px; }
 #projectsTab > .panel:first-of-type,
 #profileTab > .panel:first-of-type,
 #settingsTab > .panel:first-of-type {
-  margin-top: 0;
+  margin-top: 14px;
 }
 
 #dashboardTab > .panel + .panel,

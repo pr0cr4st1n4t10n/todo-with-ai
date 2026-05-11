@@ -32,8 +32,11 @@
           <div id="loginForm" class="form-stack">
             <input id="loginInput" type="text" placeholder="Username или email" />
             <input id="loginPasswordInput" type="password" placeholder="Пароль" />
-            <button id="loginBtn" class="btn primary">Войти</button>
-            <p class="muted tiny">Если уже входил раньше — сработает автологин через refresh-токен.</p>
+            <div class="btn-center">
+              <button id="loginBtn" class="btn primary">Войти</button>
+            </div>
+            <div class="auth-divider"><span>или</span></div>
+            <p class="auth-hint">Нет аккаунта? <button id="hintToRegister" class="btn-link">Зарегистрироваться</button></p>
           </div>
 
           <div id="registerForm" class="form-stack hidden">
@@ -41,8 +44,9 @@
             <input id="regEmailInput" type="email" placeholder="Email" />
             <input id="regDisplayNameInput" type="text" placeholder="Отображаемое имя" />
             <input id="regPasswordInput" type="password" placeholder="Пароль (минимум 6 символов)" />
-            <button id="registerBtn" class="btn secondary">Создать аккаунт</button>
-            <p class="muted tiny">Пароль хранится только в виде безопасного хеша (bcrypt).</p>
+            <div class="btn-center">
+              <button id="registerBtn" class="btn secondary">Создать аккаунт</button>
+            </div>
           </div>
         </div>
 
@@ -92,7 +96,7 @@
           </div>
           <div class="panel">
             <h2>Детали проекта</h2>
-            <div id="projectDetailsEmpty" class="muted">Выбери проект из списка слева.</div>
+            <div id="projectDetailsEmpty" class="muted">Выбери проект из списка сверху.</div>
             <div id="projectDetails" class="hidden">
               <h3 id="projectTitle"></h3>
               <p id="projectMeta" class="muted"></p>
@@ -192,5 +196,13 @@
       </section>
     </main>
     <script src="./script.js"></script>
+    <script>
+      const hintBtn = document.getElementById('hintToRegister');
+      if (hintBtn) {
+        hintBtn.addEventListener('click', () => {
+          document.getElementById('authModeRegister').click();
+        });
+      }
+    </script>
   </body>
 </html>
