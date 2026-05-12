@@ -4,15 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo with AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="mesh"></div>
-    <div class="glow glow-a"></div>
-    <div class="glow glow-b"></div>
+    <div class="bg-stage" aria-hidden="true">
+      <div class="bg-gradient"></div>
+      <div class="bg-aurora"></div>
+      <div class="bg-noise"></div>
+      <div class="mesh"></div>
+      <div class="glow glow-a"></div>
+      <div class="glow glow-b"></div>
+      <div class="glow glow-c"></div>
+    </div>
     <main class="container">
       <header class="hero">
-        <h1>ToDo with AI</h1>
+        <p class="hero-kicker">Командные проекты · ИИ-планировщик · оценка в часах</p>
+        <h1 class="hero-title">
+          <span class="hero-brand">ToDo</span><span class="hero-brand-gap"> </span><span class="hero-brand-muted">with AI</span>
+        </h1>
         <p class="subtitle">
           Декомпозируй задачу в ветвистый todo, редактируй ветки вручную и с подсказками ИИ, получай оценку в часах и
           стоимости — а также веди проекты и задачи в команде.
@@ -69,6 +84,17 @@
         </nav>
 
         <section id="statusToast" class="panel status-toast hidden"></section>
+
+        <div id="profileModal" class="profile-modal hidden" aria-hidden="true">
+          <div class="profile-modal-backdrop" id="profileModalBackdrop"></div>
+          <div class="profile-modal-panel panel" role="dialog" aria-labelledby="profileModalHeading">
+            <div class="profile-modal-head row spread">
+              <h3 id="profileModalHeading">Профиль</h3>
+              <button type="button" class="btn mini" id="profileModalClose">Закрыть</button>
+            </div>
+            <div id="profileModalContent" class="profile-modal-content"></div>
+          </div>
+        </div>
 
         <section id="dashboardTab" class="tab-pane">
           <div class="panel">

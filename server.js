@@ -82,8 +82,8 @@ function makeAvatarUrl(user) {
   if (user.avatarPath) {
     return user.avatarPath;
   }
-  const initialsBase = user.displayName || user.username || "User";
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(initialsBase)}&background=121a2f&color=ecf2ff`;
+  const seed = encodeURIComponent(user.id || user.username || "user");
+  return `https://api.dicebear.com/9.x/adventurer/png?seed=${seed}&size=128`;
 }
 
 function sanitizeUser(user) {
@@ -202,6 +202,9 @@ function assignIds(nodes, prefix = "node") {
       details: node.details || "",
       priority: node.priority || "Средний",
       completed: Boolean(node.completed),
+      assigneeId: null,
+      assigneeTakenAt: null,
+      assigneeCompletedAt: null,
       children: assignIds(node.children || [], id)
     };
   });
@@ -220,6 +223,8 @@ function normalizePlannerTree(nodes) {
       priority: node.priority || "Средний",
       completed: Boolean(node.completed),
       assigneeId: node.assigneeId || null,
+      assigneeTakenAt: node.assigneeTakenAt || null,
+      assigneeCompletedAt: Boolean(node.completed) ? node.assigneeCompletedAt || null : null,
       children: normalizePlannerTree(node.children || [])
     };
   });
@@ -254,7 +259,12 @@ function collectPlannerNodes(nodes, acc = []) {
 }
 
 function setPlannerAssigneeRecursively(node, assigneeId) {
+  const now = new Date().toISOString();
+  const previous = node.assigneeId;
   node.assigneeId = assigneeId;
+  if (!previous || previous !== assigneeId) {
+    node.assigneeTakenAt = now;
+  }
   for (const child of node.children || []) {
     setPlannerAssigneeRecursively(child, assigneeId);
   }
@@ -263,6 +273,8 @@ function setPlannerAssigneeRecursively(node, assigneeId) {
 function releasePlannerAssigneeRecursively(node, assigneeId) {
   if (node.assigneeId === assigneeId) {
     node.assigneeId = null;
+    node.assigneeTakenAt = null;
+    node.assigneeCompletedAt = null;
   }
   for (const child of node.children || []) {
     releasePlannerAssigneeRecursively(child, assigneeId);
@@ -270,8 +282,12 @@ function releasePlannerAssigneeRecursively(node, assigneeId) {
 }
 
 function completePlannerNodeRecursivelyForAssignee(node, assigneeId) {
+  const now = new Date().toISOString();
   if (node.assigneeId === assigneeId) {
-    node.completed = true;
+    if (!node.completed) {
+      node.completed = true;
+      node.assigneeCompletedAt = now;
+    }
   }
   for (const child of node.children || []) {
     completePlannerNodeRecursivelyForAssignee(child, assigneeId);
@@ -281,6 +297,7 @@ function completePlannerNodeRecursivelyForAssignee(node, assigneeId) {
 function uncompletePlannerNodeRecursivelyForAssignee(node, assigneeId) {
   if (node.assigneeId === assigneeId) {
     node.completed = false;
+    node.assigneeCompletedAt = null;
   }
   for (const child of node.children || []) {
     uncompletePlannerNodeRecursivelyForAssignee(child, assigneeId);
@@ -1014,7 +1031,7 @@ app.post(
       return res.status(400).json({ error: "Нужно указать username" });
     }
     if (!["employer", "worker"].includes(role)) {
-      return res.status(400).json({ error: "Роль должна быть employer или worker" });
+      return res.status(400).json({ error: "Роль должна быть worker (работник) или employer (работодатель)." });
     }
     const targetUsername = String(username).trim().toLowerCase();
     const targetUser = req.db.users.find((item) => item.username === targetUsername);
@@ -1364,6 +1381,36 @@ app.delete(
     req.db.taskStatusLogs = req.db.taskStatusLogs.filter((item) => item.taskId !== req.params.taskId);
     writeDb(req.db);
     return res.json({ ok: true });
+  }
+);
+
+
+app.patch(
+  "/api/projects/:projectId/members/:userId/role",
+  requireAuth,
+  requireProjectMembership,
+  ensureEmployer,
+  (req, res) => {
+    const targetUserId = req.params.userId;
+    const { role } = req.body;
+    if (!["employer", "worker"].includes(role)) {
+      return res.status(400).json({ error: "Роль должна быть employer или worker" });
+    }
+    if (req.project.ownerId === targetUserId) {
+      return res.status(400).json({ error: "Нельзя изменить роль владельца проекта" });
+    }
+    if (targetUserId === req.auth.userId) {
+      return res.status(400).json({ error: "Нельзя изменить свою собственную роль" });
+    }
+    const membership = req.db.memberships.find(
+      (item) => item.projectId === req.project.id && item.userId === targetUserId
+    );
+    if (!membership) {
+      return res.status(404).json({ error: "Участник не найден" });
+    }
+    membership.role = role;
+    writeDb(req.db);
+    return res.json({ ok: true, role });
   }
 );
 

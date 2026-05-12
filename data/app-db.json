@@ -53,16 +53,6 @@
   ],
   "projects": [
     {
-      "id": "prj_1778144144785_65c1d160",
-      "name": "Доставка",
-      "description": "",
-      "createdAt": "2026-05-07T08:55:44.785Z",
-      "ownerId": "usr_1778144099868_845cc0d7",
-      "settings": {
-        "workerCanUpdateAnyTask": true
-      }
-    },
-    {
       "id": "prj_1778145299407_633cc286",
       "name": "123",
       "description": "123",
@@ -71,23 +61,19 @@
       "settings": {
         "workerCanUpdateAnyTask": false
       }
+    },
+    {
+      "id": "prj_1778620985484_232b49e5",
+      "name": "Доставка",
+      "description": "",
+      "createdAt": "2026-05-12T21:23:05.484Z",
+      "ownerId": "usr_1778144099868_845cc0d7",
+      "settings": {
+        "workerCanUpdateAnyTask": false
+      }
     }
   ],
   "memberships": [
-    {
-      "id": "mem_1778144144785_1d4c5c52",
-      "projectId": "prj_1778144144785_65c1d160",
-      "userId": "usr_1778144099868_845cc0d7",
-      "role": "employer",
-      "createdAt": "2026-05-07T08:55:44.785Z"
-    },
-    {
-      "id": "mem_1778144940899_3c84b5d1",
-      "projectId": "prj_1778144144785_65c1d160",
-      "userId": "usr_1778144856355_52204a55",
-      "role": "worker",
-      "createdAt": "2026-05-07T09:09:00.899Z"
-    },
     {
       "id": "mem_1778145299407_6d76bd27",
       "projectId": "prj_1778145299407_633cc286",
@@ -101,33 +87,23 @@
       "userId": "usr_1778144856355_52204a55",
       "role": "worker",
       "createdAt": "2026-05-07T09:15:32.768Z"
+    },
+    {
+      "id": "mem_1778620985484_8332be33",
+      "projectId": "prj_1778620985484_232b49e5",
+      "userId": "usr_1778144099868_845cc0d7",
+      "role": "employer",
+      "createdAt": "2026-05-12T21:23:05.484Z"
+    },
+    {
+      "id": "mem_1778621074690_488fdef8",
+      "projectId": "prj_1778620985484_232b49e5",
+      "userId": "usr_1778144856355_52204a55",
+      "role": "worker",
+      "createdAt": "2026-05-12T21:24:34.690Z"
     }
   ],
   "invitations": [
-    {
-      "id": "inv_1778144886786_132768b7",
-      "projectId": "prj_1778144144785_65c1d160",
-      "username": "harrrdie3",
-      "email": "",
-      "role": "worker",
-      "invitedBy": "usr_1778144099868_845cc0d7",
-      "invitedUserId": "usr_1778144856355_52204a55",
-      "status": "declined",
-      "createdAt": "2026-05-07T09:08:06.786Z",
-      "respondedAt": "2026-05-07T09:08:47.397Z"
-    },
-    {
-      "id": "inv_1778144908593_e912fbc1",
-      "projectId": "prj_1778144144785_65c1d160",
-      "username": "harrrdie3",
-      "email": "",
-      "role": "worker",
-      "invitedBy": "usr_1778144099868_845cc0d7",
-      "invitedUserId": "usr_1778144856355_52204a55",
-      "status": "accepted",
-      "createdAt": "2026-05-07T09:08:28.594Z",
-      "respondedAt": "2026-05-07T09:09:00.899Z"
-    },
     {
       "id": "inv_1778145322059_6d6daac6",
       "projectId": "prj_1778145299407_633cc286",
@@ -141,1058 +117,377 @@
       "respondedAt": "2026-05-07T09:15:32.768Z"
     },
     {
-      "id": "inv_1778156033912_5f909a36",
-      "projectId": "prj_1778144144785_65c1d160",
-      "username": "user2",
+      "id": "inv_1778620994925_8abace55",
+      "projectId": "prj_1778620985484_232b49e5",
+      "username": "harrrdie3",
       "role": "worker",
       "invitedBy": "usr_1778144099868_845cc0d7",
-      "invitedUserId": "usr_1778155355444_fdc85e2e",
-      "status": "pending",
-      "createdAt": "2026-05-07T12:13:53.912Z",
-      "respondedAt": null
+      "invitedUserId": "usr_1778144856355_52204a55",
+      "status": "accepted",
+      "createdAt": "2026-05-12T21:23:14.925Z",
+      "respondedAt": "2026-05-12T21:24:34.690Z"
     }
   ],
-  "tasks": [
-    {
-      "id": "tsk_1778149578800_e335ec38",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Планирование и Аналитика",
-      "description": "Определение основных требований, целевой аудитории и конкурентного анализа.",
-      "status": "in_progress",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.800Z",
-      "updatedAt": "2026-05-07T10:27:09.690Z"
-    },
-    {
-      "id": "tsk_1778149578830_cff1408f",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Исследование рынка и конкурентов",
-      "description": "Анализ существующих приложений доставки еды, выявление их сильных и слабых сторон.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.830Z",
-      "updatedAt": "2026-05-07T10:26:18.830Z"
-    },
-    {
-      "id": "tsk_1778149578846_1afe1fc4",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Определение целевой аудитории",
-      "description": "Сегментация пользователей, создание портретов типичных клиентов.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.846Z",
-      "updatedAt": "2026-05-07T10:26:18.847Z"
-    },
-    {
-      "id": "tsk_1778149578862_e5d274a0",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Формирование MVP (Minimum Viable Product)",
-      "description": "Определение минимального набора функций для запуска.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.862Z",
-      "updatedAt": "2026-05-07T10:26:18.862Z"
-    },
-    {
-      "id": "tsk_1778149578876_bfb63d83",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Проектирование пользовательских сценариев",
-      "description": "Создание логики взаимодействия пользователя с приложением.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.876Z",
-      "updatedAt": "2026-05-07T10:26:18.876Z"
-    },
-    {
-      "id": "tsk_1778149578889_4fae2b66",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Разработка Wireframes",
-      "description": "Создание низкодетализированных макетов страниц.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.890Z",
-      "updatedAt": "2026-05-07T10:26:18.890Z"
-    },
-    {
-      "id": "tsk_1778149578904_017dc62e",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Создание UI-дизайна",
-      "description": "Разработка визуального стиля, цветовой палитры, типографики.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.904Z",
-      "updatedAt": "2026-05-07T10:26:18.904Z"
-    },
-    {
-      "id": "tsk_1778149578920_6d43b2b2",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Разработка технического задания",
-      "description": "Детальное описание функциональных и нефункциональных требований.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.920Z",
-      "updatedAt": "2026-05-07T10:26:18.920Z"
-    },
-    {
-      "id": "tsk_1778149578934_b0dcaa8d",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Дизайн и UX/UI",
-      "description": "Разработка пользовательских интерфейсов и сценариев взаимодействия.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.934Z",
-      "updatedAt": "2026-05-07T10:26:18.934Z"
-    },
-    {
-      "id": "tsk_1778149578948_d01295cb",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Реализация функций регистрации и авторизации",
-      "description": "Создание личного кабинета пользователя.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.948Z",
-      "updatedAt": "2026-05-07T10:26:18.948Z"
-    },
-    {
-      "id": "tsk_1778149578963_2c535e69",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Прототипирование",
-      "description": "Создание интерактивных прототипов для тестирования UX.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.963Z",
-      "updatedAt": "2026-05-07T10:26:18.963Z"
-    },
-    {
-      "id": "tsk_1778149578977_1936a3d7",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Разработка Мобильного Приложения (Клиентская часть)",
-      "description": "Реализация функционала для пользователей приложения.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.977Z",
-      "updatedAt": "2026-05-07T10:26:18.977Z"
-    },
-    {
-      "id": "tsk_1778149578990_8e226a5e",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Разработка пользовательского интерфейса",
-      "description": "Верстка экранов согласно дизайну.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:18.990Z",
-      "updatedAt": "2026-05-07T10:26:18.990Z"
-    },
-    {
-      "id": "tsk_1778149579010_bfba42d5",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Интеграция с API бэкенда",
-      "description": "Подключение к серверной части для получения данных и выполнения действий.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.010Z",
-      "updatedAt": "2026-05-07T10:26:19.010Z"
-    },
-    {
-      "id": "tsk_1778149579024_cc54c7d8",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Реализация каталога блюд и ресторанов",
-      "description": "Отображение меню, фильтрация, поиск.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.024Z",
-      "updatedAt": "2026-05-07T10:26:19.024Z"
-    },
-    {
-      "id": "tsk_1778149579039_538d7001",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Реализация оформления заказа и оплаты",
-      "description": "Корзина, выбор адреса, интеграция с платежными системами.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.039Z",
-      "updatedAt": "2026-05-07T10:26:19.039Z"
-    },
-    {
-      "id": "tsk_1778149579055_e5653d69",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Реализация отслеживания статуса заказа",
-      "description": "Уведомления о статусе заказа, карта курьера.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.055Z",
-      "updatedAt": "2026-05-07T10:26:19.055Z"
-    },
-    {
-      "id": "tsk_1778149579068_4f6c4d11",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Разработка Бэкенда и Админ-панели",
-      "description": "Создание серверной части и инструмента для управления приложением.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.068Z",
-      "updatedAt": "2026-05-07T10:26:19.068Z"
-    },
-    {
-      "id": "tsk_1778149579082_daaaa895",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Проектирование архитектуры бэкенда",
-      "description": "Выбор технологий, базы данных, структуры API.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.082Z",
-      "updatedAt": "2026-05-07T10:26:19.082Z"
-    },
-    {
-      "id": "tsk_1778149579096_9659d59d",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Разработка API для мобильного приложения",
-      "description": "Создание эндпоинтов для взаимодействия с клиентской частью.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.096Z",
-      "updatedAt": "2026-05-07T10:26:19.096Z"
-    },
-    {
-      "id": "tsk_1778149579109_26f14a97",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Разработка админ-панели",
-      "description": "Интерфейс для управления ресторанами, меню, заказами, пользователями.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.109Z",
-      "updatedAt": "2026-05-07T10:26:19.109Z"
-    },
-    {
-      "id": "tsk_1778149579126_08a6706e",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Реализация системы управления контентом (CMS)",
-      "description": "Управление информацией о ресторанах, акциях, новостях.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.126Z",
-      "updatedAt": "2026-05-07T10:26:19.126Z"
-    },
-    {
-      "id": "tsk_1778149579144_3670b757",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Интеграция с внешними сервисами",
-      "description": "Платежные шлюзы, картографические сервисы, SMS-шлюзы.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.144Z",
-      "updatedAt": "2026-05-07T10:26:19.144Z"
-    },
-    {
-      "id": "tsk_1778149579158_b32285c9",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Тестирование",
-      "description": "Проверка работоспособности и качества приложения.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.158Z",
-      "updatedAt": "2026-05-07T10:26:19.158Z"
-    },
-    {
-      "id": "tsk_1778149579173_86387f97",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Модульное тестирование",
-      "description": "Тестирование отдельных компонентов кода.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.173Z",
-      "updatedAt": "2026-05-07T10:26:19.173Z"
-    },
-    {
-      "id": "tsk_1778149579190_361e18d3",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Интеграционное тестирование",
-      "description": "Проверка взаимодействия между различными модулями.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.190Z",
-      "updatedAt": "2026-05-07T10:26:19.190Z"
-    },
-    {
-      "id": "tsk_1778149579204_786a68e8",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Функциональное тестирование",
-      "description": "Проверка соответствия приложения требованиям ТЗ.",
-      "status": "in_progress",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.204Z",
-      "updatedAt": "2026-05-07T10:29:17.943Z"
-    },
-    {
-      "id": "tsk_1778149579219_a28baa98",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Тестирование UX/UI",
-      "description": "Проверка удобства использования и соответствия дизайну.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.219Z",
-      "updatedAt": "2026-05-07T10:26:19.219Z"
-    },
-    {
-      "id": "tsk_1778149579234_6411f1f3",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Нагрузочное тестирование",
-      "description": "Проверка производительности приложения под высокой нагрузкой.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.234Z",
-      "updatedAt": "2026-05-07T10:26:19.234Z"
-    },
-    {
-      "id": "tsk_1778149579251_0415e239",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Развертывание и Запуск",
-      "description": "Подготовка и публикация приложения в магазинах приложений.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.251Z",
-      "updatedAt": "2026-05-07T10:26:19.251Z"
-    },
-    {
-      "id": "tsk_1778149579267_9cbead81",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Подготовка к публикации",
-      "description": "Создание аккаунтов разработчика, подготовка метаданных.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.267Z",
-      "updatedAt": "2026-05-07T10:26:19.267Z"
-    },
-    {
-      "id": "tsk_1778149579283_c735f756",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Публикация в App Store и Google Play",
-      "description": "Загрузка сборок приложения и прохождение модерации.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.283Z",
-      "updatedAt": "2026-05-07T10:26:19.284Z"
-    },
-    {
-      "id": "tsk_1778149579299_b67e92dc",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Настройка серверов и баз данных",
-      "description": "Развертывание бэкенда на продакшн-серверах.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.299Z",
-      "updatedAt": "2026-05-07T10:26:19.299Z"
-    },
-    {
-      "id": "tsk_1778149579316_3e05294e",
-      "projectId": "prj_1778144144785_65c1d160",
-      "title": "Маркетинговая кампания",
-      "description": "Продвижение приложения после запуска.",
-      "status": "todo",
-      "assigneeId": null,
-      "createdBy": "usr_1778144099868_845cc0d7",
-      "createdAt": "2026-05-07T10:26:19.316Z",
-      "updatedAt": "2026-05-07T10:26:19.316Z"
-    }
-  ],
-  "taskStatusLogs": [
-    {
-      "id": "log_1778149578800_6b3c1dee",
-      "taskId": "tsk_1778149578800_e335ec38",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.800Z"
-    },
-    {
-      "id": "log_1778149578830_37631327",
-      "taskId": "tsk_1778149578830_cff1408f",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.830Z"
-    },
-    {
-      "id": "log_1778149578847_af48bf05",
-      "taskId": "tsk_1778149578846_1afe1fc4",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.847Z"
-    },
-    {
-      "id": "log_1778149578862_9b96bfa2",
-      "taskId": "tsk_1778149578862_e5d274a0",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.862Z"
-    },
-    {
-      "id": "log_1778149578876_434dc8ce",
-      "taskId": "tsk_1778149578876_bfb63d83",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.876Z"
-    },
-    {
-      "id": "log_1778149578890_59aeaaaa",
-      "taskId": "tsk_1778149578889_4fae2b66",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.890Z"
-    },
-    {
-      "id": "log_1778149578904_351880db",
-      "taskId": "tsk_1778149578904_017dc62e",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.904Z"
-    },
-    {
-      "id": "log_1778149578920_9b2ed186",
-      "taskId": "tsk_1778149578920_6d43b2b2",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.920Z"
-    },
-    {
-      "id": "log_1778149578934_8541b15d",
-      "taskId": "tsk_1778149578934_b0dcaa8d",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.934Z"
-    },
-    {
-      "id": "log_1778149578948_c8eb953b",
-      "taskId": "tsk_1778149578948_d01295cb",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.948Z"
-    },
-    {
-      "id": "log_1778149578963_dea5da74",
-      "taskId": "tsk_1778149578963_2c535e69",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.963Z"
-    },
-    {
-      "id": "log_1778149578977_b83de8ff",
-      "taskId": "tsk_1778149578977_1936a3d7",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.977Z"
-    },
-    {
-      "id": "log_1778149578990_5b2174da",
-      "taskId": "tsk_1778149578990_8e226a5e",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:18.990Z"
-    },
-    {
-      "id": "log_1778149579010_9f830cf6",
-      "taskId": "tsk_1778149579010_bfba42d5",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.010Z"
-    },
-    {
-      "id": "log_1778149579024_397256d5",
-      "taskId": "tsk_1778149579024_cc54c7d8",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.024Z"
-    },
-    {
-      "id": "log_1778149579039_023d8d2e",
-      "taskId": "tsk_1778149579039_538d7001",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.039Z"
-    },
-    {
-      "id": "log_1778149579055_22b9cf8b",
-      "taskId": "tsk_1778149579055_e5653d69",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.055Z"
-    },
-    {
-      "id": "log_1778149579068_df30f565",
-      "taskId": "tsk_1778149579068_4f6c4d11",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.068Z"
-    },
-    {
-      "id": "log_1778149579082_823b510f",
-      "taskId": "tsk_1778149579082_daaaa895",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.082Z"
-    },
-    {
-      "id": "log_1778149579096_fb029bde",
-      "taskId": "tsk_1778149579096_9659d59d",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.096Z"
-    },
-    {
-      "id": "log_1778149579109_1958df89",
-      "taskId": "tsk_1778149579109_26f14a97",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.109Z"
-    },
-    {
-      "id": "log_1778149579126_9575f509",
-      "taskId": "tsk_1778149579126_08a6706e",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.126Z"
-    },
-    {
-      "id": "log_1778149579144_6189df85",
-      "taskId": "tsk_1778149579144_3670b757",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.144Z"
-    },
-    {
-      "id": "log_1778149579158_fe91a458",
-      "taskId": "tsk_1778149579158_b32285c9",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.158Z"
-    },
-    {
-      "id": "log_1778149579173_d9a8e942",
-      "taskId": "tsk_1778149579173_86387f97",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.173Z"
-    },
-    {
-      "id": "log_1778149579190_3a047bab",
-      "taskId": "tsk_1778149579190_361e18d3",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.190Z"
-    },
-    {
-      "id": "log_1778149579204_96a055a9",
-      "taskId": "tsk_1778149579204_786a68e8",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.204Z"
-    },
-    {
-      "id": "log_1778149579219_3f5c5416",
-      "taskId": "tsk_1778149579219_a28baa98",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.219Z"
-    },
-    {
-      "id": "log_1778149579234_7cf5104f",
-      "taskId": "tsk_1778149579234_6411f1f3",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.234Z"
-    },
-    {
-      "id": "log_1778149579251_586fa441",
-      "taskId": "tsk_1778149579251_0415e239",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.251Z"
-    },
-    {
-      "id": "log_1778149579267_f0b3b268",
-      "taskId": "tsk_1778149579267_9cbead81",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.267Z"
-    },
-    {
-      "id": "log_1778149579284_1f2e5451",
-      "taskId": "tsk_1778149579283_c735f756",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.284Z"
-    },
-    {
-      "id": "log_1778149579299_2f5b550c",
-      "taskId": "tsk_1778149579299_b67e92dc",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.299Z"
-    },
-    {
-      "id": "log_1778149579316_2898cc73",
-      "taskId": "tsk_1778149579316_3e05294e",
-      "fromStatus": null,
-      "toStatus": "todo",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:19.316Z"
-    },
-    {
-      "id": "log_1778149602366_85fb3326",
-      "taskId": "tsk_1778149578800_e335ec38",
-      "fromStatus": "todo",
-      "toStatus": "in_progress",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:26:42.366Z"
-    },
-    {
-      "id": "log_1778149627178_27fe9b15",
-      "taskId": "tsk_1778149578800_e335ec38",
-      "fromStatus": "in_progress",
-      "toStatus": "done",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:27:07.178Z"
-    },
-    {
-      "id": "log_1778149629690_56308be8",
-      "taskId": "tsk_1778149578800_e335ec38",
-      "fromStatus": "done",
-      "toStatus": "in_progress",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:27:09.690Z"
-    },
-    {
-      "id": "log_1778149757943_319f3a80",
-      "taskId": "tsk_1778149579204_786a68e8",
-      "fromStatus": "todo",
-      "toStatus": "in_progress",
-      "changedBy": "usr_1778144099868_845cc0d7",
-      "changedAt": "2026-05-07T10:29:17.943Z"
-    }
-  ],
+  "tasks": [],
+  "taskStatusLogs": [],
   "planners": [
     {
-      "id": "pln_1778151066074_b3724fce",
-      "projectId": "prj_1778144144785_65c1d160",
-      "taskDescription": "запустить мобильное приложение доставки еды с личным кабинетом и админ-панелью",
+      "id": "pln_1778621003532_9ac7c726",
+      "projectId": "prj_1778620985484_232b49e5",
+      "taskDescription": "запустить мобильное приложение для доставки еды с личным кабинетом, админ-панелью",
       "hourlyRate": 500,
       "tree": [
         {
-          "id": "node-1778151072866-0",
+          "id": "node-1778621040164-0",
           "title": "Планирование и Анализ",
           "details": "Определение основных требований, целевой аудитории и конкурентного анализа.",
           "priority": "Высокий",
           "completed": false,
           "assigneeId": null,
+          "assigneeTakenAt": null,
+          "assigneeCompletedAt": null,
           "children": [
             {
-              "id": "node-1778151072866-0-1778151072866-0",
+              "id": "node-1778621040164-0-1778621040164-0",
               "title": "Исследование рынка и конкурентов",
               "details": "Анализ существующих приложений доставки еды, выявление их сильных и слабых сторон.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-0-1778151072866-1",
+              "id": "node-1778621040164-0-1778621040164-1",
               "title": "Определение целевой аудитории",
-              "details": "Сегментация пользователей, создание портретов типичных клиентов.",
+              "details": "Сегментация пользователей (клиенты, рестораны, курьеры, администраторы), определение их потребностей.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-0-1778151072866-2",
-              "title": "Формирование MVP (Minimum Viable Product)",
-              "details": "Определение минимального набора функций для запуска.",
+              "id": "node-1778621040164-0-1778621040164-2",
+              "title": "Формирование функциональных требований",
+              "details": "Детальное описание всех функций для мобильного приложения, личного кабинета, админ-панели.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-0-1778151072866-3",
+              "id": "node-1778621040164-0-1778621040164-3",
               "title": "Разработка технического задания (ТЗ)",
-              "details": "Детальное описание функциональных и нефункциональных требований.",
+              "details": "Создание полного документа с описанием архитектуры, технологий, требований к дизайну и функционалу.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             }
           ]
         },
         {
-          "id": "node-1778151072866-1",
+          "id": "node-1778621040164-1",
           "title": "Дизайн и UX/UI",
           "details": "Разработка пользовательских интерфейсов и сценариев взаимодействия.",
           "priority": "Высокий",
           "completed": true,
           "assigneeId": "usr_1778144856355_52204a55",
+          "assigneeTakenAt": "2026-05-12T21:39:10.134Z",
+          "assigneeCompletedAt": "2026-05-12T21:39:11.049Z",
           "children": [
             {
-              "id": "node-1778151072866-1-1778151072866-0",
+              "id": "node-1778621040164-1-1778621040164-0",
               "title": "Проектирование пользовательских сценариев (User Flows)",
-              "details": "Определение путей пользователя в приложении.",
+              "details": "Определение путей пользователя в приложении для различных ролей.",
               "priority": "Высокий",
               "completed": true,
               "assigneeId": "usr_1778144856355_52204a55",
+              "assigneeTakenAt": "2026-05-12T21:39:10.134Z",
+              "assigneeCompletedAt": "2026-05-12T21:39:11.049Z",
               "children": []
             },
             {
-              "id": "node-1778151072866-1-1778151072866-1",
-              "title": "Создание вайрфреймов (Wireframes)",
-              "details": "Разработка схематичных макетов страниц.",
+              "id": "node-1778621040164-1-1778621040164-1",
+              "title": "Создание Wireframes",
+              "details": "Разработка низкодетализированных макетов для определения структуры и расположения элементов.",
               "priority": "Высокий",
               "completed": true,
               "assigneeId": "usr_1778144856355_52204a55",
+              "assigneeTakenAt": "2026-05-12T21:39:10.134Z",
+              "assigneeCompletedAt": "2026-05-12T21:39:11.049Z",
               "children": []
             },
             {
-              "id": "node-1778151072866-1-1778151072866-2",
+              "id": "node-1778621040164-1-1778621040164-2",
               "title": "Разработка UI-дизайна",
-              "details": "Создание визуального стиля приложения, иконок, цветовой палитры.",
+              "details": "Создание высокодетализированных макетов с учетом брендинга, цветовой палитры и типографики.",
               "priority": "Высокий",
               "completed": true,
               "assigneeId": "usr_1778144856355_52204a55",
+              "assigneeTakenAt": "2026-05-12T21:39:10.134Z",
+              "assigneeCompletedAt": "2026-05-12T21:39:11.049Z",
               "children": []
             },
             {
-              "id": "node-1778151072866-1-1778151072866-3",
+              "id": "node-1778621040164-1-1778621040164-3",
               "title": "Прототипирование",
-              "details": "Создание интерактивного прототипа для тестирования UX.",
+              "details": "Создание интерактивных прототипов для тестирования пользовательского опыта.",
               "priority": "Средний",
               "completed": true,
               "assigneeId": "usr_1778144856355_52204a55",
+              "assigneeTakenAt": "2026-05-12T21:39:10.134Z",
+              "assigneeCompletedAt": "2026-05-12T21:39:11.049Z",
               "children": []
             }
           ]
         },
         {
-          "id": "node-1778151072866-2",
-          "title": "Разработка мобильного приложения",
-          "details": "Создание клиентской части приложения для iOS и Android.",
+          "id": "node-1778621040164-2",
+          "title": "Разработка Мобильного Приложения (Клиентская часть)",
+          "details": "Создание приложений для iOS и Android.",
           "priority": "Высокий",
           "completed": false,
           "assigneeId": null,
+          "assigneeTakenAt": null,
+          "assigneeCompletedAt": null,
           "children": [
             {
-              "id": "node-1778151072866-2-1778151072866-0",
-              "title": "Разработка фронтенда (iOS/Android)",
-              "details": "Реализация пользовательского интерфейса и логики на стороне клиента.",
+              "id": "node-1778621040164-2-1778621040164-0",
+              "title": "Разработка клиентской части для iOS",
+              "details": "Реализация функционала приложения на Swift/Objective-C.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-2-1778151072866-1",
-              "title": "Интеграция с бэкендом",
-              "details": "Подключение мобильного приложения к серверной части.",
+              "id": "node-1778621040164-2-1778621040164-1",
+              "title": "Разработка клиентской части для Android",
+              "details": "Реализация функционала приложения на Kotlin/Java.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-2-1778151072866-2",
-              "title": "Реализация функций личного кабинета",
-              "details": "Профилирование пользователя, история заказов, избранное и т.д.",
+              "id": "node-1778621040164-2-1778621040164-2",
+              "title": "Интеграция с API бэкенда",
+              "details": "Подключение мобильных приложений к серверной части.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-2-1778151072866-3",
-              "title": "Реализация функций для ресторанов/курьеров (если применимо)",
-              "details": "Интерфейсы для партнеров сервиса.",
-              "priority": "Средний",
+              "id": "node-1778621040164-2-1778621040164-3",
+              "title": "Тестирование мобильных приложений",
+              "details": "Юнит-тестирование, интеграционное тестирование, тестирование UI.",
+              "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             }
           ]
         },
         {
-          "id": "node-1778151072866-3",
-          "title": "Разработка бэкенда и API",
-          "details": "Создание серверной части, базы данных и API для взаимодействия с приложением.",
+          "id": "node-1778621040164-3",
+          "title": "Разработка Бэкенда и API",
+          "details": "Создание серверной логики, базы данных и API.",
           "priority": "Высокий",
           "completed": false,
           "assigneeId": null,
+          "assigneeTakenAt": null,
+          "assigneeCompletedAt": null,
           "children": [
             {
-              "id": "node-1778151072866-3-1778151072866-0",
+              "id": "node-1778621040164-3-1778621040164-0",
               "title": "Проектирование архитектуры бэкенда",
-              "details": "Выбор технологий, структуры базы данных.",
+              "details": "Выбор технологий, определение структуры сервисов.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-3-1778151072866-1",
+              "id": "node-1778621040164-3-1778621040164-1",
               "title": "Разработка API",
-              "details": "Создание RESTful API для обмена данными.",
+              "details": "Создание RESTful API для взаимодействия между мобильными приложениями, админ-панелью и базой данных.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-3-1778151072866-2",
+              "id": "node-1778621040164-3-1778621040164-2",
+              "title": "Разработка базы данных",
+              "details": "Проектирование схемы базы данных, настройка СУБД.",
+              "priority": "Высокий",
+              "completed": false,
+              "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
+              "children": []
+            },
+            {
+              "id": "node-1778621040164-3-1778621040164-3",
               "title": "Реализация бизнес-логики",
-              "details": "Обработка заказов, управление пользователями, платежи.",
+              "details": "Обработка заказов, управление пользователями, интеграция с платежными системами и службами доставки.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
-              "children": []
-            },
-            {
-              "id": "node-1778151072866-3-1778151072866-3",
-              "title": "Интеграция с платежными системами",
-              "details": "Подключение сервисов для приема платежей.",
-              "priority": "Высокий",
-              "completed": false,
-              "assigneeId": null,
-              "children": []
-            },
-            {
-              "id": "node-1778151072866-3-1778151072866-4",
-              "title": "Интеграция с картографическими сервисами",
-              "details": "Отображение ресторанов, отслеживание курьеров.",
-              "priority": "Высокий",
-              "completed": false,
-              "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             }
           ]
         },
         {
-          "id": "node-1778151072866-4",
-          "title": "Разработка админ-панели",
-          "details": "Создание веб-интерфейса для управления приложением.",
+          "id": "node-1778621040164-4",
+          "title": "Разработка Админ-панели",
+          "details": "Создание веб-интерфейса для управления системой.",
           "priority": "Высокий",
           "completed": false,
           "assigneeId": null,
+          "assigneeTakenAt": null,
+          "assigneeCompletedAt": null,
           "children": [
             {
-              "id": "node-1778151072866-4-1778151072866-0",
+              "id": "node-1778621040164-4-1778621040164-0",
               "title": "Проектирование админ-панели",
-              "details": "Определение функционала для администраторов.",
+              "details": "Определение функционала для управления ресторанами, меню, заказами, пользователями, курьерами.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-4-1778151072866-1",
-              "title": "Разработка интерфейса админ-панели",
-              "details": "Создание UI для управления пользователями, заказами, ресторанами, контентом.",
+              "id": "node-1778621040164-4-1778621040164-1",
+              "title": "Разработка UI админ-панели",
+              "details": "Создание интерфейса для администраторов.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-4-1778151072866-2",
-              "title": "Реализация функций управления контентом",
-              "details": "Добавление/редактирование ресторанов, меню, акций.",
+              "id": "node-1778621040164-4-1778621040164-2",
+              "title": "Реализация функционала админ-панели",
+              "details": "Разработка логики управления данными и операциями.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-4-1778151072866-3",
-              "title": "Реализация функций управления пользователями и заказами",
-              "details": "Просмотр, редактирование, отмена заказов, управление аккаунтами.",
+              "id": "node-1778621040164-4-1778621040164-3",
+              "title": "Интеграция с API бэкенда",
+              "details": "Подключение админ-панели к серверной части.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             }
           ]
         },
         {
-          "id": "node-1778151072866-5",
-          "title": "Тестирование и QA",
-          "details": "Проверка работоспособности, безопасности и производительности приложения.",
+          "id": "node-1778621040164-5",
+          "title": "Тестирование и Запуск",
+          "details": "Комплексное тестирование, подготовка к релизу и развертывание.",
           "priority": "Высокий",
           "completed": false,
           "assigneeId": null,
+          "assigneeTakenAt": null,
+          "assigneeCompletedAt": null,
           "children": [
             {
-              "id": "node-1778151072866-5-1778151072866-0",
-              "title": "Модульное тестирование",
-              "details": "Тестирование отдельных компонентов кода.",
-              "priority": "Высокий",
-              "completed": false,
-              "assigneeId": null,
-              "children": []
-            },
-            {
-              "id": "node-1778151072866-5-1778151072866-1",
+              "id": "node-1778621040164-5-1778621040164-0",
               "title": "Интеграционное тестирование",
-              "details": "Проверка взаимодействия между различными модулями.",
+              "details": "Проверка взаимодействия всех компонентов системы.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-5-1778151072866-2",
-              "title": "Тестирование пользовательского интерфейса (UI Testing)",
-              "details": "Проверка корректности отображения и работы интерфейса.",
+              "id": "node-1778621040164-5-1778621040164-1",
+              "title": "Приемочное тестирование (UAT)",
+              "details": "Тестирование конечными пользователями или представителями заказчика.",
               "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-5-1778151072866-3",
-              "title": "Тестирование производительности",
-              "details": "Оценка скорости работы приложения под нагрузкой.",
+              "id": "node-1778621040164-5-1778621040164-2",
+              "title": "Нагрузочное тестирование",
+              "details": "Проверка производительности системы под высокой нагрузкой.",
               "priority": "Средний",
               "completed": false,
               "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-5-1778151072866-4",
-              "title": "Бета-тестирование",
-              "details": "Тестирование приложения реальными пользователями перед запуском.",
-              "priority": "Средний",
+              "id": "node-1778621040164-5-1778621040164-3",
+              "title": "Подготовка к релизу",
+              "details": "Сборка финальных версий приложений, подготовка к публикации в магазинах приложений.",
+              "priority": "Высокий",
               "completed": false,
               "assigneeId": null,
-              "children": []
-            }
-          ]
-        },
-        {
-          "id": "node-1778151072866-6",
-          "title": "Развертывание и Запуск",
-          "details": "Публикация приложения в магазинах и настройка инфраструктуры.",
-          "priority": "Высокий",
-          "completed": false,
-          "assigneeId": "usr_1778144856355_52204a55",
-          "children": [
-            {
-              "id": "node-1778151072866-6-1778151072866-0",
-              "title": "Настройка серверной инфраструктуры",
-              "details": "Развертывание бэкенда на серверах.",
-              "priority": "Высокий",
-              "completed": false,
-              "assigneeId": "usr_1778144856355_52204a55",
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             },
             {
-              "id": "node-1778151072866-6-1778151072866-1",
-              "title": "Подготовка к публикации в App Store и Google Play",
-              "details": "Создание аккаунтов разработчика, подготовка метаданных.",
+              "id": "node-1778621040164-5-1778621040164-4",
+              "title": "Развертывание на продакшн",
+              "details": "Публикация приложений в App Store и Google Play, развертывание бэкенда и админ-панели.",
               "priority": "Высокий",
               "completed": false,
-              "assigneeId": "usr_1778144856355_52204a55",
-              "children": []
-            },
-            {
-              "id": "node-1778151072866-6-1778151072866-2",
-              "title": "Публикация приложения",
-              "details": "Загрузка и отправка приложения на ревью в магазины.",
-              "priority": "Высокий",
-              "completed": false,
-              "assigneeId": "usr_1778144856355_52204a55",
-              "children": []
-            },
-            {
-              "id": "node-1778151072866-6-1778151072866-3",
-              "title": "Маркетинговая кампания",
-              "details": "Продвижение приложения после запуска.",
-              "priority": "Средний",
-              "completed": false,
-              "assigneeId": "usr_1778144856355_52204a55",
+              "assigneeId": null,
+              "assigneeTakenAt": null,
+              "assigneeCompletedAt": null,
               "children": []
             }
           ]
         }
       ],
-      "updatedAt": "2026-05-07T12:14:33.702Z",
-      "updatedBy": "usr_1778144099868_845cc0d7"
+      "updatedAt": "2026-05-12T21:44:31.406Z",
+      "updatedBy": "usr_1778144856355_52204a55"
     }
   ],
-  "refreshTokens": [
-    {
-      "id": "rt_1778535079425_a896a097",
-      "userId": "usr_1778144099868_845cc0d7",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfMTc3ODE0NDA5OTg2OF84NDVjYzBkNyIsImlhdCI6MTc3ODUzNTA3OSwiZXhwIjoxNzgxMTI3MDc5fQ.iGLDDO7Id10vzDlN6Uv9tWKhTnhg-OGzaUOE2cynzNM",
-      "expiresAt": "2026-06-10T21:31:19.425Z",
-      "createdAt": "2026-05-11T21:31:19.425Z"
-    }
-  ]
+  "refreshTokens": []
 }

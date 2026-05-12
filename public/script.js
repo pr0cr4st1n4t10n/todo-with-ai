@@ -26,6 +26,97 @@ const state = {
   projectMembers: []
 };
 
+function roleLabel(role) {
+  if (role === "employer") return "работодатель";
+  if (role === "worker") return "работник";
+  return role;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text == null ? "" : String(text);
+  return div.innerHTML;
+}
+
+function memberLineHtml(user, roleSuffix) {
+  const u = escapeHtml(user.username);
+  const dn = escapeHtml(user.displayName || user.username);
+  return `<a href="#" class="profile-ref" data-username="${u}">${dn} <span class="muted">@${u}</span></a>${roleSuffix}`;
+}
+
+let assigneeTipHideTimer = null;
+let assigneeTipAnchor = null;
+const assigneeTooltipLayer = document.createElement("div");
+assigneeTooltipLayer.className = "assignee-hover-tip";
+assigneeTooltipLayer.style.display = "none";
+assigneeTooltipLayer.setAttribute("role", "tooltip");
+
+function hideAssigneeTooltipLayer() {
+  clearTimeout(assigneeTipHideTimer);
+  assigneeTooltipLayer.style.display = "none";
+  assigneeTooltipLayer.style.visibility = "hidden";
+  assigneeTipAnchor = null;
+  document.removeEventListener("scroll", hideAssigneeTooltipLayer, true);
+  window.removeEventListener("resize", placeAssigneeTooltipLayer);
+}
+
+function scheduleHideAssigneeTooltipLayer() {
+  clearTimeout(assigneeTipHideTimer);
+  assigneeTipHideTimer = setTimeout(hideAssigneeTooltipLayer, 180);
+}
+
+function placeAssigneeTooltipLayer() {
+  if (!assigneeTipAnchor) return;
+  assigneeTooltipLayer.style.display = "block";
+  assigneeTooltipLayer.style.position = "fixed";
+  assigneeTooltipLayer.style.visibility = "hidden";
+  assigneeTooltipLayer.style.left = "0";
+  assigneeTooltipLayer.style.top = "0";
+  assigneeTooltipLayer.style.transform = "none";
+  const tw = Math.max(assigneeTooltipLayer.offsetWidth, 200);
+  const th = Math.max(assigneeTooltipLayer.offsetHeight, 36);
+  const r = assigneeTipAnchor.getBoundingClientRect();
+  const margin = 10;
+  let top = r.bottom + margin;
+  let left = r.left + r.width / 2 - tw / 2;
+  if (top + th > window.innerHeight - margin) {
+    top = r.top - th - margin;
+  }
+  if (top < margin) top = margin;
+  if (left + tw > window.innerWidth - margin) left = window.innerWidth - tw - margin;
+  if (left < margin) left = margin;
+  assigneeTooltipLayer.style.left = `${Math.round(left)}px`;
+  assigneeTooltipLayer.style.top = `${Math.round(top)}px`;
+  assigneeTooltipLayer.style.visibility = "visible";
+}
+
+function bindAssigneeTooltip(host, getPayload) {
+  const show = () => {
+    clearTimeout(assigneeTipHideTimer);
+    hideAssigneeTooltipLayer();
+    assigneeTipAnchor = host;
+    const payload = getPayload();
+    fillAssigneeTooltip(assigneeTooltipLayer, payload.node, payload.assignee);
+    document.body.appendChild(assigneeTooltipLayer);
+    document.addEventListener("scroll", hideAssigneeTooltipLayer, true);
+    window.addEventListener("resize", placeAssigneeTooltipLayer);
+    placeAssigneeTooltipLayer();
+  };
+  host.onmouseenter = show;
+  host.onmouseleave = (ev) => {
+    if (assigneeTooltipLayer.contains(ev.relatedTarget)) return;
+    scheduleHideAssigneeTooltipLayer();
+  };
+  host.onfocus = show;
+  host.onblur = hideAssigneeTooltipLayer;
+}
+
+assigneeTooltipLayer.addEventListener("mouseenter", () => clearTimeout(assigneeTipHideTimer));
+assigneeTooltipLayer.addEventListener("mouseleave", (ev) => {
+  if (assigneeTipAnchor && (assigneeTipAnchor === ev.relatedTarget || assigneeTipAnchor.contains(ev.relatedTarget))) return;
+  scheduleHideAssigneeTooltipLayer();
+});
+
 function resetProjectUiState() {
   state.activeProjectId = null;
   state.activeProject = null;
@@ -51,18 +142,47 @@ function resetProjectUiState() {
   }
 }
 
+let toastStack = document.getElementById("toastStack");
+if (!toastStack) {
+  toastStack = document.createElement("div");
+  toastStack.id = "toastStack";
+  document.body.appendChild(toastStack);
+}
+
 function showToast(message, isError = false) {
-  const appHidden = appView.classList.contains("hidden");
-  if (appHidden) {
+  if (appView.classList.contains("hidden")) {
     authStatus.textContent = message;
     authStatus.classList.toggle("error", isError);
     return;
   }
 
-  statusToast.textContent = message;
-  statusToast.classList.remove("hidden");
-  statusToast.classList.toggle("error", isError);
-  setTimeout(() => statusToast.classList.add("hidden"), 3000);
+  const item = document.createElement("div");
+  item.className = "toast-item" + (isError ? " error" : "");
+
+  const icon = document.createElement("span");
+  icon.className = "toast-icon";
+  icon.textContent = isError ? "\u2715" : "\u2713";
+
+  const msg = document.createElement("span");
+  msg.className = "toast-msg";
+  msg.textContent = message;
+
+  const close = document.createElement("button");
+  close.className = "toast-close";
+  close.textContent = "\xd7";
+  close.setAttribute("aria-label", "\u0417\u0430\u043a\u0440\u044b\u0442\u044c");
+  close.addEventListener("click", () => removeToast(item));
+
+  item.append(icon, msg, close);
+  toastStack.appendChild(item);
+
+  item._toastTimer = setTimeout(() => removeToast(item), 4000);
+}
+
+function removeToast(item) {
+  clearTimeout(item._toastTimer);
+  item.classList.add("leaving");
+  item.addEventListener("animationend", () => item.remove(), { once: true });
 }
 
 async function request(url, options = {}) {
@@ -142,7 +262,7 @@ function renderNavUser() {
     return;
   }
   navAvatar.src = state.currentUser.avatarUrl;
-  navUserLabel.textContent = `${state.currentUser.displayName} (@${state.currentUser.username})`;
+  navUserLabel.innerHTML = memberLineHtml(state.currentUser, "");
 }
 
 function activateTab(tabName) {
@@ -255,14 +375,14 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
 async function loadDashboard() {
   const data = await request("/api/dashboard");
   document.getElementById("dashboardProjects").innerHTML = data.projects.length
-    ? data.projects.map((item) => `<div class="card-item"><strong>${item.name}</strong> — ${item.role}</div>`).join("")
+    ? data.projects.map((item) => `<div class="card-item"><strong>${item.name}</strong> — ${roleLabel(item.role)}</div>`).join("")
     : "<p class='muted'>Нет активных проектов. Создай первый в разделе Проекты.</p>";
 
   document.getElementById("pendingInvitations").innerHTML = data.pendingInvitations.length
     ? data.pendingInvitations
         .map(
           (inv) => `<div class="card-item">
-            <strong>${inv.projectName}</strong> — роль: ${inv.role}
+            <strong>${inv.projectName}</strong> — роль: ${roleLabel(inv.role)}
             <div class="row"><button class="btn mini" onclick="respondInvitation('${inv.id}','accept')">Принять</button>
             <button class="btn mini" onclick="respondInvitation('${inv.id}','decline')">Отклонить</button></div>
           </div>`
@@ -296,7 +416,7 @@ async function loadProjects() {
     ? data.projects
         .map(
           (project) =>
-            `<button class="project-item ${state.activeProjectId === project.id ? "selected" : ""}" onclick="selectProject('${project.id}')">${project.name}<span>${project.role}</span></button>`
+            `<button class="project-item ${state.activeProjectId === project.id ? "selected" : ""}" onclick="selectProject('${project.id}')">${project.name}<span>${roleLabel(project.role)}</span></button>`
         )
         .join("")
     : "<p class='muted'>У тебя пока нет проектов.</p>";
@@ -315,26 +435,32 @@ async function loadProjectDetails(projectId) {
   document.getElementById("projectDetailsEmpty").classList.add("hidden");
   document.getElementById("projectDetails").classList.remove("hidden");
   document.getElementById("projectTitle").textContent = data.project.name;
-  document.getElementById("projectMeta").textContent = `Ваша роль: ${data.project.yourRole}. Создан: ${new Date(data.project.createdAt).toLocaleString()}`;
+  document.getElementById("projectMeta").textContent = `Ваша роль: ${roleLabel(data.project.yourRole)}. Создан: ${new Date(data.project.createdAt).toLocaleString()}`;
   document.getElementById("editProjectDescription").value = data.project.description || "";
 
   const isEmployer = data.project.yourRole === "employer";
 
   document.getElementById("projectMembers").innerHTML = data.members
     .map((item) => {
-      const base = `${item.user.displayName} (@${item.user.username}) — ${item.role}`;
+      const roleSuffix = ` — ${roleLabel(item.role)}`;
+      const line = memberLineHtml(item.user, roleSuffix);
       const isOwner = item.user.id === data.project.ownerId;
       const isSelf = state.currentUser && item.user.id === state.currentUser.id;
 
       if (isSelf) {
-        return `<div class="card-item row spread"><span>${base}</span><button class="btn mini" onclick="exitProject()">Выйти</button></div>`;
+        return `<div class="card-item row spread"><span>${line}</span><button class="btn mini" onclick="exitProject()">Выйти</button></div>`;
       }
 
       if (!isEmployer || isOwner) {
-        return `<div class="card-item">${base}</div>`;
+        return `<div class="card-item">${line}</div>`;
       }
 
-      return `<div class="card-item row spread"><span>${base}</span><button class="btn mini" onclick="kickMember('${item.user.id}')">Исключить</button></div>`;
+      const otherRole = item.role === "employer" ? "worker" : "employer";
+      const changeRoleLabel = item.role === "employer" ? "Сделать работником" : "Сделать работодателем";
+      return `<div class="card-item row spread"><span>${line}</span><div class="row">
+        <button class="btn mini" onclick="changeMemberRole('${item.user.id}','${otherRole}')">${changeRoleLabel}</button>
+        <button class="btn mini ghost" onclick="kickMember('${item.user.id}')">Исключить</button>
+      </div></div>`;
     })
     .join("");
 
@@ -392,7 +518,7 @@ document.getElementById("deleteProjectBtn").addEventListener("click", async () =
   }
   try {
     if (!state.activeProject || state.activeProject.yourRole !== "employer") {
-      showToast("Только Работодатель может удалить проект.", true);
+      showToast("Только работодатель может удалить проект.", true);
       return;
     }
     await request(`/api/projects/${state.activeProjectId}`, { method: "DELETE" });
@@ -431,6 +557,19 @@ window.kickMember = async (userId) => {
     await request(`/api/projects/${state.activeProjectId}/members/${userId}`, { method: "DELETE" });
     await Promise.all([loadProjectDetails(state.activeProjectId), loadDashboard()]);
     showToast("Участник удален из проекта.");
+  } catch (error) {
+    showToast(error.message, true);
+  }
+};
+
+window.changeMemberRole = async (userId, newRole) => {
+  try {
+    await request(`/api/projects/${state.activeProjectId}/members/${userId}/role`, {
+      method: "PATCH",
+      body: JSON.stringify({ role: newRole })
+    });
+    await Promise.all([loadProjectDetails(state.activeProjectId), loadDashboard()]);
+    showToast(`Роль изменена на ${newRole === "employer" ? "работодатель" : "работник"}.`);
   } catch (error) {
     showToast(error.message, true);
   }
@@ -491,7 +630,7 @@ async function loadProfile() {
   document.getElementById("profileUsername").value = data.profile.username || "";
   document.getElementById("profileBio").value = data.profile.bio || "";
   document.getElementById("profileProjects").innerHTML = data.projects.length
-    ? data.projects.map((item) => `<div class="card-item">${item.name} — ${item.role}</div>`).join("")
+    ? data.projects.map((item) => `<div class="card-item">${item.name} — ${roleLabel(item.role)}</div>`).join("")
     : "<p class='muted'>Пока нет участия в проектах.</p>";
 }
 
@@ -632,6 +771,46 @@ function findNodeById(nodes, id) {
   return null;
 }
 
+function formatPlannerDate(iso) {
+  if (!iso) {
+    return "—";
+  }
+  try {
+    return new Date(iso).toLocaleString("ru-RU", { dateStyle: "short", timeStyle: "short" });
+  } catch {
+    return String(iso);
+  }
+}
+
+function fillAssigneeTooltip(tipEl, node, assignee) {
+  tipEl.replaceChildren();
+  const title = document.createElement("div");
+  title.className = "assignee-tip-title";
+  if (assignee) {
+    const link = document.createElement("a");
+    link.href = "#";
+    link.className = "profile-ref";
+    link.dataset.username = assignee.username;
+    link.textContent = `${assignee.displayName} (@${assignee.username})`;
+    title.appendChild(link);
+  } else if (node.assigneeId) {
+    title.textContent = "Исполнитель назначен";
+  } else {
+    title.textContent = "Нет исполнителя";
+  }
+  tipEl.appendChild(title);
+  const takenRow = document.createElement("div");
+  takenRow.className = "assignee-tip-row";
+  takenRow.textContent = `Взял задачу: ${formatPlannerDate(node.assigneeTakenAt)}`;
+  tipEl.appendChild(takenRow);
+  const doneRow = document.createElement("div");
+  doneRow.className = "assignee-tip-row";
+  doneRow.textContent = node.completed
+    ? `Отметил выполненной: ${formatPlannerDate(node.assigneeCompletedAt)}`
+    : "Выполнено: ещё нет";
+  tipEl.appendChild(doneRow);
+}
+
 function collectNodeIds(node, acc = []) {
   if (!node) {
     return acc;
@@ -669,7 +848,10 @@ function renderTree() {
   const rootList = document.createElement("div");
   rootList.className = "tree-root";
   todoTree.forEach((node) => rootList.appendChild(renderNode(node, 0)));
-  treeContainer.appendChild(rootList);
+  const scrollWrap = document.createElement("div");
+  scrollWrap.className = "tree-scroll";
+  scrollWrap.appendChild(rootList);
+  treeContainer.appendChild(scrollWrap);
 }
 function renderNode(node, depth = 0) {
   const wrap = document.createElement("div");
@@ -743,19 +925,51 @@ function renderNode(node, depth = 0) {
   const doneText = document.createElement("span");
   doneText.textContent = "Готово";
   doneWrap.append(doneCheckbox, doneText);
-  const assigneeBadge = document.createElement("span");
-  assigneeBadge.className = "hours-badge";
+  const assigneeSlot = document.createElement("span");
+  assigneeSlot.className = "assignee-slot";
   if (assignee) {
-    assigneeBadge.textContent = `@${assignee.username}`;
+    const host = document.createElement("span");
+    host.className = "assignee-avatar-host";
+    host.tabIndex = 0;
+    const avatarImg = document.createElement("img");
+    avatarImg.className = "avatar micro";
+    avatarImg.src = assignee.avatarUrl;
+    avatarImg.alt = assignee.displayName || assignee.username;
+    avatarImg.addEventListener("error", () => {
+      if (avatarImg.dataset.avatarFallback) return;
+      avatarImg.dataset.avatarFallback = "1";
+      avatarImg.src = `https://api.dicebear.com/9.x/croodles/png?seed=${encodeURIComponent(assignee.id)}&size=128`;
+    });
+    bindAssigneeTooltip(host, () => {
+      const cur = findNodeById(todoTree, node.id) || node;
+      const mem = state.projectMembers
+        .map((item) => item.user)
+        .find((user) => user && user.id === cur.assigneeId);
+      return { node: cur, assignee: mem || null };
+    });
+    host.append(avatarImg);
+    assigneeSlot.appendChild(host);
   } else if (node.assigneeId) {
-    assigneeBadge.textContent = "занято";
+    const host = document.createElement("span");
+    host.className = "assignee-avatar-host assignee-unknown-host";
+    host.tabIndex = 0;
+    const stub = document.createElement("span");
+    stub.className = "assignee-unknown-circle";
+    stub.textContent = "?";
+    stub.setAttribute("aria-label", "Исполнитель не в списке участников");
+    bindAssigneeTooltip(host, () => ({ node: findNodeById(todoTree, node.id) || node, assignee: null }));
+    host.append(stub);
+    assigneeSlot.appendChild(host);
   } else {
-    assigneeBadge.textContent = "свободно";
+    const label = document.createElement("span");
+    label.className = "hours-badge";
+    label.textContent = "свободно";
+    assigneeSlot.appendChild(label);
   }
   const effortBadge = document.createElement("span");
   effortBadge.className = "hours-badge";
   effortBadge.textContent = hoursByNodeId[node.id] !== undefined ? `${Number(hoursByNodeId[node.id]).toFixed(1)} ч` : "—";
-  topRow.append(titleInput, prioritySelect, selectBtn, doneWrap, assigneeBadge, effortBadge);
+  topRow.append(titleInput, prioritySelect, selectBtn, doneWrap, assigneeSlot, effortBadge);
   card.appendChild(topRow);
   const detailsInput = document.createElement("textarea");
   detailsInput.className = "node-details";
@@ -801,36 +1015,41 @@ function renderNode(node, depth = 0) {
     });
     actions.append(addChildBtn, removeBtn);
   } else if (isWorker) {
-    const takeBtn = document.createElement("button");
-    takeBtn.className = "btn mini";
-    takeBtn.textContent = "Взять";
-    takeBtn.disabled = Boolean(node.completed || (node.assigneeId && !isCurrentUserAssignee));
-    takeBtn.addEventListener("click", async () => {
-      try {
-        const targetNode = findNodeById(todoTree, node.id);
-        const idsToTake = collectNodeIds(targetNode);
-        for (const id of idsToTake) {
-          await takePlannerNode(id);
+    if (isCurrentUserAssignee) {
+      const cancelBtn = document.createElement("button");
+      cancelBtn.className = "btn mini";
+      cancelBtn.textContent = "Отменить";
+      cancelBtn.disabled = Boolean(node.completed);
+      cancelBtn.addEventListener("click", async () => {
+        try {
+          await cancelPlannerNode(node.id);
+          await Promise.all([loadPlanner(), loadDashboard()]);
+          showToast("Задача возвращена в общий пул.");
+        } catch (error) {
+          showToast(error.message, true);
         }
-        await Promise.all([loadPlanner(), loadDashboard()]);
-        showToast("Ветка взята в работу вместе с подветками.");
-      } catch (error) {
-        showToast(error.message, true);
-      }
-    });
-    const cancelBtn = document.createElement("button");
-    cancelBtn.className = "btn mini";
-    cancelBtn.textContent = "Отменить";
-    cancelBtn.disabled = !isCurrentUserAssignee || Boolean(node.completed);
-    cancelBtn.addEventListener("click", async () => {
-      try {
-        await cancelPlannerNode(node.id);
-        await Promise.all([loadPlanner(), loadDashboard()]);
-        showToast("Задача возвращена в общий пул.");
-      } catch (error) {
-        showToast(error.message, true);
-      }
-    });
+      });
+      actions.appendChild(cancelBtn);
+    } else if (!node.assigneeId) {
+      const takeBtn = document.createElement("button");
+      takeBtn.className = "btn mini";
+      takeBtn.textContent = "Взять";
+      takeBtn.disabled = Boolean(node.completed);
+      takeBtn.addEventListener("click", async () => {
+        try {
+          const targetNode = findNodeById(todoTree, node.id);
+          const idsToTake = collectNodeIds(targetNode);
+          for (const id of idsToTake) {
+            await takePlannerNode(id);
+          }
+          await Promise.all([loadPlanner(), loadDashboard()]);
+          showToast("Ветка взята в работу вместе с подветками.");
+        } catch (error) {
+          showToast(error.message, true);
+        }
+      });
+      actions.appendChild(takeBtn);
+    }
     const completeBtn = document.createElement("button");
     completeBtn.className = "btn mini";
     completeBtn.textContent = node.completed ? "Снять выполнено" : "Выполнено";
@@ -852,7 +1071,7 @@ function renderNode(node, depth = 0) {
         showToast(error.message, true);
       }
     });
-    actions.append(takeBtn, cancelBtn, completeBtn);
+    actions.appendChild(completeBtn);
   }
   card.appendChild(actions);
   wrap.appendChild(card);
@@ -936,7 +1155,11 @@ estimateBtn.addEventListener("click", async () => {
     const completedCost = Number((completedHours * (Number(data.hourlyRate) || 0)).toFixed(2));
     const remainingCost = Number(((Number(data.totalCost) || 0) - completedCost).toFixed(2));
     const payoutRows = (data.payoutByWorker || [])
-      .map((item) => `<li><strong>${item.displayName}</strong> (@${item.username}) — ${Number(item.amount || 0).toFixed(2)}</li>`)
+      .map((item) => {
+        const u = escapeHtml(item.username);
+        const dn = escapeHtml(item.displayName || item.username);
+        return `<li><a href="#" class="profile-ref" data-username="${u}"><strong>${dn}</strong> <span class="muted">@${u}</span></a> — ${Number(item.amount || 0).toFixed(2)}</li>`;
+      })
       .join("");
     estimationEl.innerHTML = `<h3>Детальная оценка</h3><ul class="list">${rows}</ul><div class="metrics">
       <div class="metric"><p class="label">Всего часов</p><p class="value">${Number(data.totalHours || 0).toFixed(1)}</p></div>
@@ -953,9 +1176,83 @@ estimateBtn.addEventListener("click", async () => {
   }
 });
 
+function closeProfileModal() {
+  const modal = document.getElementById("profileModal");
+  if (!modal) return;
+  modal.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+async function openUserProfile(username) {
+  if (!username) return;
+  if (state.currentUser && username === state.currentUser.username) {
+    closeProfileModal();
+    hideAssigneeTooltipLayer();
+    activateTab("profile");
+    return;
+  }
+  try {
+    const data = await request(`/api/profile/${encodeURIComponent(username)}`);
+    const profile = data.profile;
+    const projects = data.projects || [];
+    const u = escapeHtml(profile.username);
+    const dn = escapeHtml(profile.displayName || profile.username);
+    const bioRaw = profile.bio || "";
+    const bioPara = bioRaw
+      ? `<p class="profile-view-bio">${escapeHtml(bioRaw).replace(/\n/g, "<br>")}</p>`
+      : `<p class="muted">Нет описания.</p>`;
+    const projectsBlock = projects.length
+      ? `<ul class="list">${projects
+          .map((p) => `<li>${escapeHtml(p.name)} — ${roleLabel(p.role)}</li>`)
+          .join("")}</ul>`
+      : "<p class=\"muted\">Пока без проектов.</p>";
+    document.getElementById("profileModalContent").innerHTML = `
+      <div class="profile-view">
+        <img class="avatar large" alt="" src=${JSON.stringify(profile.avatarUrl)} />
+        <p class="profile-view-line"><strong>${dn}</strong> <span class="muted">@${u}</span></p>
+        <p class="muted profile-view-meta">На сайте с ${new Date(profile.createdAt).toLocaleDateString("ru-RU")}</p>
+        ${bioPara}
+        <h4>Участие в проектах</h4>
+        ${projectsBlock}
+      </div>`;
+    document.getElementById("profileModalHeading").textContent = `Профиль: ${dn}`;
+    const modal = document.getElementById("profileModal");
+    modal.classList.remove("hidden");
+    modal.setAttribute("aria-hidden", "false");
+  } catch (err) {
+    showToast(err.message, true);
+  }
+}
+
+function initProfileUi() {
+  const modal = document.getElementById("profileModal");
+  const backdrop = document.getElementById("profileModalBackdrop");
+  const closeBtn = document.getElementById("profileModalClose");
+  if (!modal || !backdrop || !closeBtn) return;
+  backdrop.addEventListener("click", closeProfileModal);
+  closeBtn.addEventListener("click", closeProfileModal);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) closeProfileModal();
+  });
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a.profile-ref");
+    if (!a || !a.dataset.username) return;
+    e.preventDefault();
+    hideAssigneeTooltipLayer();
+    openUserProfile(a.dataset.username);
+  });
+  if (navAvatar) {
+    navAvatar.style.cursor = "pointer";
+    navAvatar.addEventListener("click", () => {
+      if (state.currentUser) openUserProfile(state.currentUser.username);
+    });
+  }
+}
+
 taskDescriptionEl.addEventListener("input", () => schedulePlannerSave());
 hourlyRateEl.addEventListener("input", () => schedulePlannerSave());
 
 renderTree();
 setAuthMode("login");
+initProfileUi();
 bootstrapAuth().catch(() => setAuthenticatedUi(false));
